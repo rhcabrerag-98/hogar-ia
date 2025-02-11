@@ -49,6 +49,10 @@ export const signInAction = async (formData: FormData) => {
     password,
   });
 
+  supabase.auth.signInWithOAuth({
+  provider: 'google',
+})
+
   if (error) {
     return encodedRedirect("error", "/sign-in", error.message);
   }
@@ -132,3 +136,19 @@ export const signOutAction = async () => {
   await supabase.auth.signOut();
   return redirect("/sign-in");
 };
+
+export const handleGoogleSignIn = async () => {
+  const supabase = await createClient();
+  const origin = (await headers()).get("origin");
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: `${origin}/auth/callback` },
+  });
+  if (data.url) {
+    redirect(data.url); // use the redirect API for your server framework
+  }
+  if (error) {
+    console.error(error);
+  }
+};
+

@@ -4,6 +4,7 @@ import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { FaUserPlus } from "react-icons/fa6";
 
 export default async function Signup(props: {
   searchParams: Promise<Message>;
@@ -38,7 +39,12 @@ export default async function Signup(props: {
             minLength={6}
             required
           />
-          <SubmitButton formAction={signUpAction} pendingText="Registrándote...">
+          <SubmitButton
+            formAction={signUpAction}
+            className="px-4 py-2 flex items-center justify-center gap-2"
+            pendingText="Registrándote..."
+          >
+            <FaUserPlus className="text-xl"/>
             Registrarse
           </SubmitButton>
           <FormMessage message={searchParams} />
