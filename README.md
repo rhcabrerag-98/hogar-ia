@@ -1,58 +1,50 @@
-# PROYECTO INDIVIDUAL PROINNOVATE - TOP FULL STACK DEVELOPER
+# React + TypeScript + Vite
 
-## Descripción del Proyecto
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-El objetivo de este reto es desarrollar una aplicación completa que integre funcionalidades avanzadas de backend y frontend, cumpliendo con los siguientes requisitos técnicos.
-Este proyecto te permitirá demostrar tu capacidad para trabajar de forma autónoma, implementar tecnología moderna y crear un producto funcional y desplegado.
+Currently, two official plugins are available:
 
-## Requisitos del Proyecto
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-~~- Registro y autenticación de usuarios.~~
-- Almacenar información en una base de datos (Postgresql, MySQL, MongoDB, etc).
-- El backend debe estar implementado en Node.js (Express) y el frontend en React. Usar TypeScript es opcional.
-- Debe incluir carga de imágenes y envío de correos.
-- Debe tener al menos una de las siguientes funcionalidades:
-  - Pagos (epayco, PayU, Stripe, etc...)
-  - Presentar información en un mapa.
-  - Tiempo Real (Web Sockets).
-  - Integración de LLM con OpenAI o Deepseek.
-~~- Debe estar desplegada en Internet (Netllify, Heroku, Vercel)~~
-- Debe tener pruebas end-to-end con Cypress.
-- Se debe presentar un video a modo de DEMO de no mas de 7 minutos donde el estudiantes exponga los siguientes temas:
-  - Introducción (Nombre del proyecto, URL’s).
-  - Descripción de la aplicación.
-  - Tecnologías (React, Material, Express, Socket.io, MongoDB, Postgresql, etc)
-  - Diagrama de como esta distribuida su aplicacion (arquitectura) backend, frontend, servicios extras
-- Como respuesta de esta mision deberas agregar los links de:
-  - El enlace a github (en caso de tener varios repos incluirlos todos)
-  - El video de maximo 7 minutos explicando su proyecto
-  - El enlace al despliegue en producción
+## Expanding the ESLint configuration
 
-## Fecha maxima de entrega preliminar
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-Lunes 17 de febero de 2025 a las 11:00 pm hora Perú. Después de esta hora no se recibirán los proyectos.
-Se entrega a través de email dirigido a nayruth.calla@gmail.com con copia a nayib.abdala@makeitreal.camp (el enlace a github - en caso de tener varios repos incluirlos todos -, el video de maximo 7 minutos explicando su proyecto, e l enlace al despliegue en producción)
+- Configure the top-level `parserOptions` property like this:
 
-Una vez entregado el proyecto tu mentor de apoyo te dará retroalimentación y de necesitar correcciones tendrás hasta el 25 de febrero para presentarlas.
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-## Fecha máxima de entrega final
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-Martes 25 de febrero de 2025 a las 11 pm hora Perú. Después de esta hora no se recibirán más proyectos y no se tendrá derecho a más modificaciones del proyecto para recibir retroalimentación.
-Se entrega a través de email dirigido a nayruth.calla@gmail.com con copia a nayib.abdala@makeitreal.camp (el enlace a github - en caso de tener varios repos incluirlos todos -, el video de maximo 7 minutos explicando su proyecto, e l enlace al despliegue en producción)
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
 
-## Grabaciones de clases
-
-https://github.com/makeitrealcamp/top-fs-dev-proinnovate-i-2024/blob/main/clases.md
-
-## Herramientas de AI
-
-- https://chatgpt.com/
-- https://chat.deepseek.com/
-- https://v0.dev
-- https://claude.ai/
-
-## Metor asignado para tu evaluación
-
-- Nayruth Calla
-- Slack: @Nay Calla
-- Email: nayruth.calla@gmail.com
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```
