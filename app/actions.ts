@@ -49,10 +49,6 @@ export const signInAction = async (formData: FormData) => {
     password,
   });
 
-  supabase.auth.signInWithOAuth({
-  provider: 'google',
-})
-
   if (error) {
     return encodedRedirect("error", "/sign-in", error.message);
   }
@@ -145,10 +141,11 @@ export const handleGoogleSignIn = async () => {
     options: { redirectTo: `${origin}/auth/callback` },
   });
   if (data.url) {
-    redirect(data.url); // use the redirect API for your server framework
+    redirect(data.url);
   }
   if (error) {
-    console.error(error);
+    console.error('Error al iniciar sesión con Google', error)
+    return
   }
 };
 
