@@ -9,7 +9,7 @@ export const Footer = () => {
 				to='/'
 				className={`text-2xl font-bold tracking-tighter transition-all text-white flex-1`}
 			>
-				Hogar.IA
+				Decoraciones Baratos
 			</Link>
 
 			<div className='flex flex-col gap-4 flex-1'>
@@ -55,7 +55,7 @@ export const Footer = () => {
 				</p>
 
 				<p className='text-xs leading-6'>
-					No te pierdas las novedades que Hogar.IA tiene para
+					No te pierdas las novedades que HogarIA tiene para
 					ti.
 				</p>
 

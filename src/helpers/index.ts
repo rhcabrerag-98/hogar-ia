@@ -12,7 +12,7 @@ export const formatPrice = (price: number) => {
 };
 
 
-// Función para preparar los productos - (CELULARES)
+// Función para preparar los productos - ()
 export const prepareProducts = (products: Product[]) => {
 	return products.map(product => {
 		// Agrupar las variantes por color

@@ -33,7 +33,7 @@ export const Brands = () => {
 
 			<p className='w-2/3 text-center text-sm md:text-base'>
 				Tenemos lo más moderno en tecnología y los últimos modelos de
-				celulares disponibles
+				decoraciones disponibles
 			</p>
 
 			<div className='grid grid-cols-3 gap-6 mt-8 items-center md:grid-cols-6'>
