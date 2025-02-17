@@ -34,8 +34,8 @@ export const ThankyouPage = () => {
 					className='text-4xl font-bold self-center tracking-tighter transition-all md:text-5xl'
 				>
 					<p>
-						Celulares
-						<span className='text-cyan-600'>Baratos</span>
+						Hogar
+						<span className='text-cyan-600'>.IA</span>
 					</p>
 				</Link>
 			</header>
@@ -53,13 +53,11 @@ export const ThankyouPage = () => {
 					<h3 className='font-medium'>Tu pedido está confirmado</h3>
 
 					<p className='text-sm'>
-						Gracias por realizar tu compra en Celularesbaratos. Para
-						realizar la transferencia te compartimos los siguientes
-						datos
+					Gracias por realizar tu compra en Hogar.IA. Para completar la transferencia, te compartimos los siguientes datos para productos derivados para el hogar.
 					</p>
 
 					<div className='space-y-0.5 text-sm'>
-						<p>BANCO PICHINCHA</p>
+						<p>BANCO BCP</p>
 						<p>Razón Social: CelularesBaratos</p>
 						<p>RUC: 123456789000</p>
 						<p>Tipo de cuenta: Corriente</p>
@@ -68,7 +66,7 @@ export const ThankyouPage = () => {
 
 					<p className='text-sm'>
 						Una vez realizada la transferencia, comparte tu
-						comprobante a ventas@celularesbaratos.com para procesarla
+						comprobante a rhcabrerag@outlook.com para procesarla
 						y hacerte la entrega de tu dispositivo a domicilio.
 					</p>
 				</div>
@@ -160,7 +158,7 @@ export const ThankyouPage = () => {
 					</p>
 
 					<Link
-						to='/celulares'
+						to='/productos'
 						className='text-white bg-black py-4 text-sm rounded-md px-5 tracking-tight font-semibold'
 					>
 						Seguir comprando

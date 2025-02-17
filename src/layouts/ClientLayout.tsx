@@ -29,6 +29,15 @@ export const ClientLayout = () => {
 			{/* Menú */}
 			<nav className='flex justify-center gap-10 text-sm font-medium'>
 				<NavLink
+					to='/dashboard'
+					className={({ isActive }) =>
+						`${isActive ? 'underline' : 'hover:underline'}`
+					}
+				>
+					Panel Admin
+				</NavLink>	
+
+				<NavLink
 					to='/account/pedidos'
 					className={({ isActive }) =>
 						`${isActive ? 'underline' : 'hover:underline'}`
