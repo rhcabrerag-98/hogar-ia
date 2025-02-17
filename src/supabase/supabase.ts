@@ -140,7 +140,7 @@ export type Database = {
           email: string
           full_name: string
           id?: string
-          phone: string
+          phone?: string
           user_id: string
         }
         Update: {
