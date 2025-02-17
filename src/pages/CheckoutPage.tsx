@@ -1,10 +1,28 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCartStore } from '../store/cart.store';
 import { FormCheckout } from '../components/checkout/FormCheckout';
 import { ItemsCheckout } from '../components/checkout/ItemsCheckout';
+import { useUser } from '../hooks';
+import { Loader } from '../components/shared/Loader';
+import { useEffect } from 'react';
+import { supabase } from '../supabase/client';
 
 export const CheckoutPage = () => {
 	const totalItems = useCartStore(state => state.totalItemsInCart);
+
+	const { isLoading } = useUser();
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		supabase.auth.onAuthStateChange(async (event, session) => {
+			if (event === 'SIGNED_OUT' || !session) {
+				navigate('/login');
+			}
+		});
+	}, [navigate]);
+
+	if (isLoading) return <Loader />;
 
 	return (
 		<div
@@ -18,8 +36,8 @@ export const CheckoutPage = () => {
 					className='text-4xl font-bold self-center tracking-tighter transition-all md:text-5xl md:self-start'
 				>
 					<p>
-						Hogar
-						<span className='text-cyan-600'>IA</span>
+						Celulares
+						<span className='text-cyan-600'>Baratos</span>
 					</p>
 				</Link>
 			</header>

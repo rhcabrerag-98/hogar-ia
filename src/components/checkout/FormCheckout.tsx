@@ -102,7 +102,7 @@ export const FormCheckout = () => {
 						className='border border-slate-200 rounded-md p-3'
 						{...register('country')}
 					>
-						<option value='Ecuador'>Ecuador</option>
+						<option value='Cajamarca'>Cajamarca</option>
 					</select>
 				</div>
 

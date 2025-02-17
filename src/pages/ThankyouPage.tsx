@@ -1,17 +1,30 @@
-import { Link, useParams } from 'react-router-dom';
-import { useOrder } from '../hooks';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useOrder, useUser } from '../hooks';
 import { Loader } from '../components/shared/Loader';
 import { CiCircleCheck } from 'react-icons/ci';
 import { formatPrice } from '../helpers';
+import { useEffect } from 'react';
+import { supabase } from '../supabase/client';
 
 export const ThankyouPage = () => {
 	const { id } = useParams<{ id: string }>();
 
 	const { data, isLoading, isError } = useOrder(Number(id));
+	const { isLoading: isLoadingSession } = useUser();
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		supabase.auth.onAuthStateChange(async (event, session) => {
+			if (event === 'SIGNED_OUT' || !session) {
+				navigate('/login');
+			}
+		});
+	}, [navigate]);
 
 	if (isError) return <div>Error al cargar la orden</div>;
 
-	if (isLoading || !data) return <Loader />;
+	if (isLoading || !data || isLoadingSession) return <Loader />;
 
 	return (
 		<div className='flex flex-col h-screen'>
@@ -21,8 +34,8 @@ export const ThankyouPage = () => {
 					className='text-4xl font-bold self-center tracking-tighter transition-all md:text-5xl'
 				>
 					<p>
-						Hogar
-						<span className='text-cyan-600'>IA</span>
+						Celulares
+						<span className='text-cyan-600'>Baratos</span>
 					</p>
 				</Link>
 			</header>
@@ -40,14 +53,14 @@ export const ThankyouPage = () => {
 					<h3 className='font-medium'>Tu pedido está confirmado</h3>
 
 					<p className='text-sm'>
-						Gracias por realizar tu compra en HogarIA. Para
+						Gracias por realizar tu compra en Celularesbaratos. Para
 						realizar la transferencia te compartimos los siguientes
 						datos
 					</p>
 
 					<div className='space-y-0.5 text-sm'>
 						<p>BANCO PICHINCHA</p>
-						<p>Razón Social: HogarIA</p>
+						<p>Razón Social: CelularesBaratos</p>
 						<p>RUC: 123456789000</p>
 						<p>Tipo de cuenta: Corriente</p>
 						<p>Número de cuenta: 1234567890</p>
@@ -55,7 +68,7 @@ export const ThankyouPage = () => {
 
 					<p className='text-sm'>
 						Una vez realizada la transferencia, comparte tu
-						comprobante a rhcabrerag@outlook.com para procesarla
+						comprobante a ventas@celularesbaratos.com para procesarla
 						y hacerte la entrega de tu dispositivo a domicilio.
 					</p>
 				</div>
@@ -147,7 +160,7 @@ export const ThankyouPage = () => {
 					</p>
 
 					<Link
-						to='/productos'
+						to='/celulares'
 						className='text-white bg-black py-4 text-sm rounded-md px-5 tracking-tight font-semibold'
 					>
 						Seguir comprando
