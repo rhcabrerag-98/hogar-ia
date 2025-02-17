@@ -1,15 +1,15 @@
 import { CardProduct } from '../components/products/CardProduct';
 import { ContainerFilter } from '../components/products/ContainerFilter';
-import { allDecoraciones } from '../data/initialData';
+import { allProductos } from '../data/initialData';
 import { prepareProducts } from '../helpers';
 
 export const ProductsPage = () => {
-	const preparedProducts = prepareProducts(allDecoraciones);
+	const preparedProducts = prepareProducts(allProductos);
 
 	return (
 		<>
 			<h1 className='text-5xl font-semibold text-center mb-12'>
-				Productos
+				Celulares
 			</h1>
 
 			<div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'>

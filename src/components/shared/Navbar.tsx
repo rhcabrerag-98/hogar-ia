@@ -17,10 +17,9 @@ export const Navbar = () => {
 					<NavLink
 						key={link.id}
 						to={link.href}
+						// eslint-disable-next-line no-empty-pattern
 						className={({ isActive }) =>
-							`S/. {
-								isActive ? 'text-green-400 underline' : ''
-							} transition-all duration-300 font-medium hover:text-green-400 hover:underline `
+							`${isActive ? 'text-green-400 underline' : ''} transition-all duration-300 font-medium hover:text-green-400 hover:underline`
 						}
 					>
 						{link.title}

@@ -17,7 +17,6 @@ export const CardProduct = ({
 	img,
 	name,
 	price,
-	slug,
 	colors,
 	variants,
 }: Props) => {
@@ -38,6 +37,7 @@ export const CardProduct = ({
 			<Link
 				to={`/productos/S/. {slug}`}
 				className='flex relative group overflow-hidden '
+				onClick={() => setActiveColor(colors[0])}
 			>
 				<div className='flex h-[350px] w-full items-center justify-center py-2 lg:h-[250px]'>
 					<img
