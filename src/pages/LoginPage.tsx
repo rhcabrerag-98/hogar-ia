@@ -5,8 +5,8 @@ import { useLogin, useUser } from '../hooks';
 import { Loader } from '../components/shared/Loader';
 
 export const LoginPage = () => {
-	const [email, setEmail] = useState('juan.ivanof@laurete.com');
-	const [password, setPassword] = useState('Abc123');
+	const [email, setEmail] = useState('rhcabrerag@outlook.com');
+	const [password, setPassword] = useState('@bc@BC123');
 
 	const { mutate, isPending } = useLogin();
 	const { session, isLoading } = useUser();

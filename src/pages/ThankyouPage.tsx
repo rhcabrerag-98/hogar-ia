@@ -58,7 +58,7 @@ export const ThankyouPage = () => {
 
 					<div className='space-y-0.5 text-sm'>
 						<p>BANCO BCP</p>
-						<p>Razón Social: CelularesBaratos</p>
+						<p>Razón Social: Hogar.IA</p>
 						<p>RUC: 123456789000</p>
 						<p>Tipo de cuenta: Corriente</p>
 						<p>Número de cuenta: 1234567890</p>

@@ -64,7 +64,7 @@ export const CardProduct = ({
 	return (
 		<div className='flex flex-col gap-6 relative'>
 			<Link
-				to={`/celulares/${slug}`}
+				to={`/productos/${slug}`}
 				className='flex relative group overflow-hidden '
 			>
 				<div className='flex h-[350px] w-full items-center justify-center py-2 lg:h-[250px]'>

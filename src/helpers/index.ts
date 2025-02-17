@@ -11,7 +11,7 @@ export const formatPrice = (price: number) => {
 	.replace('S/', 'S/.'); // Reemplaza "S/" por "S/."
 };
 
-// Función para preparar los productos - (CELULARES)
+// Función para preparar los productos
 export const prepareProducts = (products: Product[]) => {
 	return products.map(product => {
 		// Agrupar las variantes por color

@@ -26,7 +26,7 @@ export const NavbarMobile = () => {
 				>
 					<p>
 						Productos
-						<span className='text-cyan-600'>Baratos</span>
+						<span className='text-cyan-600'>Decoraciones</span>
 					</p>
 				</Link>
 
