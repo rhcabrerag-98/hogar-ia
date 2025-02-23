@@ -26,11 +26,12 @@ export const FormCheckout = () => {
 	const cleanCart = useCartStore(state => state.cleanCart);
 	const cartItems = useCartStore(state => state.items);
 	const totalAmount = useCartStore(state => state.totalAmount);
+	const API_URL = import.meta.env.VITE_API_URL;
 
 	const onSubmit = handleSubmit(async data => {
 		if (!stripe || !elements) return;
 
-		const response = await fetch("/api/create-payment-intent", {
+		const response = await fetch(`${API_URL}/create-payment-intent`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ amount: totalAmount * 100, currency: "usd" }) // Ajusta el monto según el total
@@ -71,8 +72,8 @@ export const FormCheckout = () => {
 
 	if (isPending) {
 		return (
-			<div className='flex flex-col gap-3 h-screen items-center justify-center'>
-				<ImSpinner2 className='animate-spin h-10 w-10' />
+			<div className='flex flex-col items-center justify-center h-screen gap-3'>
+				<ImSpinner2 className='w-10 h-10 animate-spin' />
 				<p className='text-sm font-medium'>Estamos procesando tu pedido</p>
 			</div>
 		);
@@ -90,20 +91,20 @@ export const FormCheckout = () => {
 					<InputAddress register={register} errors={errors} name='city' placeholder='Ciudad' />
 					<InputAddress register={register} errors={errors} name='postalCode' placeholder='Código Postal (Opcional)' />
 
-					<select className='border border-slate-200 rounded-md p-3' {...register('country')}>
+					<select className='p-3 border rounded-md border-slate-200' {...register('country')}>
 						<option value='Cajamarca'>Cajamarca</option>
 					</select>
 				</div>
 
 				<div className='flex flex-col gap-3'>
 					<p className='text-sm font-medium'>Método de pago</p>
-					<div className='border border-slate-600 bg-stone-100 p-4 rounded-md'>
+					<div className='p-4 border rounded-md border-slate-600 bg-stone-100'>
 						<CardElement className='p-3 border border-gray-300 rounded-md' />
 					</div>
 				</div>
 
 				<div className='flex flex-col gap-6'>
-					<h3 className='font-semibold text-3xl'>Resumen del pedido</h3>
+					<h3 className='text-3xl font-semibold'>Resumen del pedido</h3>
 					<ItemsCheckout />
 				</div>
 
