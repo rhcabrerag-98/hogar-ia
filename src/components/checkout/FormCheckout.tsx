@@ -26,7 +26,10 @@ export const FormCheckout = () => {
   //const API_URL = import.meta.env.VITE_API_URL;
 
   const onSubmit = handleSubmit(async (data) => {
-    if (!stripe || !elements) return;
+    if (!stripe || !elements) {
+      console.error("Stripe o Elements no están listos");
+      return;
+    }
 
     // 1️⃣ 👉 Obtener `clientSecret` del backend
     const response = await fetch(
@@ -38,8 +41,14 @@ export const FormCheckout = () => {
       }
     );
 
-    const { clientSecret } = await response.json();
-    console.log("Respuesta del backend:", clientSecret);
+    // ✅ Usar un nombre diferente para la variable
+    const responseData = await response.json();
+    console.log("Respuesta completa del backend:", responseData);
+
+    // ✅ Extraer `clientSecret` correctamente
+    const clientSecret =
+      responseData.clientSecret || responseData.client_secret;
+    console.log("clientSecret recibido:", clientSecret);
 
     if (!clientSecret) {
       console.error("No se recibió clientSecret del backend");
@@ -68,6 +77,10 @@ export const FormCheckout = () => {
       return;
     }
 
+    if (!result.paymentIntent || result.paymentIntent.status !== "succeeded") {
+      console.error("El pago no fue exitoso:", result.paymentIntent);
+      return;
+    }
     console.log("Pago exitoso:", result.paymentIntent);
 
     // 4️⃣ 👉 Si el pago fue exitoso, registrar la orden en la base de datos
@@ -78,6 +91,7 @@ export const FormCheckout = () => {
         quantity: item.quantity,
         price: item.price,
       })),
+
       totalAmount,
       paymentIntentId: result.paymentIntent.id, // Agregar el ID del pago exitoso
     };
