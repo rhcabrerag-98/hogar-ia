@@ -17,9 +17,6 @@ import { signOut } from "../../actions";
 import { useState, useEffect } from "react";
 
 export const Navbar = () => {
-  //const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
-  const API_URL = import.meta.env.REACT_APP_API_URL || "http://localhost:5000";
-
   const openSheet = useGlobalStore((state) => state.openSheet);
   const totalItemsInCart = useCartStore((state) => state.totalItemsInCart);
   const setActiveNavMobile = useGlobalStore(
