@@ -17,6 +17,9 @@ import { signOut } from "../../actions";
 import { useState, useEffect } from "react";
 
 export const Navbar = () => {
+  //const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.REACT_APP_API_URL || "http://localhost:5000";
+
   const openSheet = useGlobalStore((state) => state.openSheet);
   const totalItemsInCart = useCartStore((state) => state.totalItemsInCart);
   const setActiveNavMobile = useGlobalStore(
@@ -35,11 +38,12 @@ export const Navbar = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/profile/image/${customer.id}`
+        `https://hogar-ia-backend.vercel.app/api/profile/latest-image/${customer.id}`
       );
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data.imageUrl);
         setUserImage(data.imageUrl);
       } else {
         setUserImage(null);
@@ -56,8 +60,12 @@ export const Navbar = () => {
     }
   }, [session, customer?.id]);
 
-  const handleFileUpload = async (event) => {
-    const file = event.target.files[0];
+  const handleFileUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const files = event.target.files;
+    if (!files) return;
+    const file = files[0];
     if (!file || !customer?.id) return;
 
     const fileExtension = file.name.split(".").pop();
@@ -68,10 +76,13 @@ export const Navbar = () => {
     formData.append("userId", customer.id);
 
     try {
-      const response = await fetch("http://localhost:5000/api/profile/upload", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://hogar-ia-backend.vercel.app/api/profile/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Error al subir la imagen");
@@ -79,6 +90,9 @@ export const Navbar = () => {
 
       const data = await response.json();
       setUserImage(data.url);
+
+      // **Recargar la página**
+      window.location.reload();
 
       console.log("Imagen subida correctamente");
     } catch (error) {
