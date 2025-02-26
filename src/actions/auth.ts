@@ -93,15 +93,20 @@ export const signIn = async ({ email, password }: IAuthLogin) => {
 };
 
 export const signOut = async () => {
-  const { error } = await supabase.auth.signOut();
+  try {
+    const { error } = await supabase.auth.signOut();
 
-  if (error) {
-    console.log(error);
-    throw new Error("Error al cerrar sesión");
+    if (error) {
+      console.error("Error al cerrar sesión:", error.message);
+      alert("Hubo un problema al cerrar sesión. Inténtalo de nuevo.");
+      return;
+    }
+
+    // ✅ Redirigir a la página de inicio sin recargar
+    window.location.href = "/";
+  } catch (err) {
+    console.error("Error inesperado al cerrar sesión:", err);
   }
-
-  // ✅ Recargar la página para reflejar el cierre de sesión
-  window.location.reload();
 };
 
 export const getSession = async () => {
